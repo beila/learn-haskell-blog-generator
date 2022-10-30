@@ -44,3 +44,16 @@ escape =
         _ -> [c]
     in
     concat . map escapeChar
+
+ul_ :: [Structure] -> Structure
+ul_ = mergeStructures "ul" "li"
+
+ol_ :: [Structure] -> Structure
+ol_ = mergeStructures "ol" "li"
+
+mergeStructures :: String -> String -> [Structure] -> Structure
+mergeStructures listDeclaration listItem =
+    Structure . el listDeclaration . concat . map (el listItem . getStructureString)
+
+code_ :: String -> Structure
+code_ = Structure . el "pre" . escape
