@@ -21,8 +21,8 @@ render (Html html) = html
 
 newtype Structure = Structure String
 
-append_ :: Structure -> Structure -> Structure
-append_ (Structure a) (Structure b) = Structure (a <> b)
+instance Semigroup Structure where
+    c1 <> c2 = Structure (getStructureString c1 <> getStructureString c2)
 
 getStructureString :: Structure -> String
 getStructureString struct =
